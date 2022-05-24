@@ -1830,16 +1830,21 @@ section {
   border: 1px solid #ced4da;
   box-shadow: none;
 }
-.auth .theambtn{
+.auth .theambtn, .medicines button, .doctors button{
   width: 180px;
   height: 50px;
   border-radius: 25px;
   background-color: #FF6337;
   border: 0;
 }
-.auth .theambtn:hover{
+.auth .theambtn:hover, .medicines button:hover, .doctors button:hover{
   background-color: #ff7e5b;
 }
-.auth .btn:focus, .auth .btn-secondary:focus{
+.auth .btn:focus, .auth .btn-secondary:focus, .medicines .btn:focus, .medicines .btn-secondary:focus, .doctors .btn:focus, .doctors .btn-secondary:focus{
   box-shadow: none;
+  background-color: #FF6337;
+}
+.medicines button, .doctors button{
+  height: 40px;
+  width: 100%;
 }
