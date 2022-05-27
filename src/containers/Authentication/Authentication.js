@@ -1,9 +1,74 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, FormGroup, Input, Label } from "reactstrap";
+import * as yup from 'yup';
+import { Form, Formik, useFormik } from 'formik';
 
 function Authentication(props) {
   let [user, setUser] = useState("Login");
   let [reset, setReset] = useState(false);
+
+  let loginError = {
+    email : yup.string().email("Enter Valid Email").required("Email is Required"),
+    password : yup.string().min(6, 'Password length must be greater than 6 characters.').max(12, 'Password length must be less than 12 characters.').required("Password is Required")
+  }
+  let signupError = {
+    name : yup.string().required('Name is Required'),
+    email : yup.string().email("Enter Valid Email").required("Email is Required"),
+    password : yup.string().min(6, 'Password length must be greater than 6 characters.').max(12, 'Password length must be less than 12 characters.').required("Password is Required")
+  }
+
+  let resetError = {
+    email : yup.string().email("Enter Valid Email").required("Email is Required")
+  }
+
+  let schema, initVal;
+
+  if(user === 'Login' && reset === false){
+    schema = yup.object().shape(loginError);
+    initVal = {
+      email: '',
+      password : ''
+    }
+  }
+  else if(user === 'Signup' && reset === false){
+    schema = yup.object().shape(signupError);
+    initVal = {
+      name : '',
+      email: '',
+      password : ''
+    }
+  }
+  else if(reset === true){
+    schema = yup.object().shape(resetError);
+    initVal = {
+      email: ''
+    }
+  }
+
+    const handleLogin = (values) => {
+      console.log('Login');
+    }
+
+    const handleSignup = (values) => {
+      console.log('Signup');
+    }
+    const handleReset = (values) => {
+      console.log('Forgot');
+    }
+
+    const formik = useFormik({
+      initialValues: initVal,
+      validationSchema : schema,
+      onSubmit: values => {
+        if(user === 'Login'){
+          handleLogin(values);
+        }else if(user === 'Signup'){
+          handleSignup(values);
+        }else if(reset === true){
+          handleReset(values);
+        }
+      }
+    })
 
   return (
     <main id="main">
@@ -40,7 +105,8 @@ function Authentication(props) {
                     Signup to Your Account
                   </h2>
                 )}
-                <Form inline>
+                <Formik>
+                <Form onSubmit={formik.handleSubmit} >
                   {user === "Signup" ? (
                     <FormGroup floating>
                       <Input
@@ -48,8 +114,10 @@ function Authentication(props) {
                         name="name"
                         placeholder="Name"
                         type="name"
+                        onChange={formik.handleChange}
                       />
                       <Label for="exampleName">Name</Label>
+                      {formik.errors.name ? <p className="text-start ms-3 text-danger small">{formik.errors.name}</p> : null}
                     </FormGroup>
                   ) : null}
                   <FormGroup floating>
@@ -58,8 +126,10 @@ function Authentication(props) {
                       name="email"
                       placeholder="Email"
                       type="email"
+                      onChange={formik.handleChange}
                     />
                     <Label for="exampleEmail">Email</Label>
+                    {formik.errors.email ? <p className="text-start ms-3 text-danger small">{formik.errors.email}</p> : null}
                   </FormGroup>
                   <FormGroup floating>
                   {
@@ -70,8 +140,10 @@ function Authentication(props) {
                         name="password"
                         placeholder="Password"
                         type="password"
-                        />
+                        onChange={formik.handleChange}
+                      />
                       <Label for="examplePassword">Password</Label>
+                      {formik.errors.password ? <p className="text-start ms-3 text-danger small">{formik.errors.password}</p> : null}
                     </>
                     }
                     {user === "Login" ? (
@@ -112,6 +184,7 @@ function Authentication(props) {
                     </Button>
                   )}
                 </Form>
+                </Formik>
               </div>
             </div>
             <div className="col-lg-4 signup">
