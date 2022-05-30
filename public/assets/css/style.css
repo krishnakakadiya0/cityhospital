@@ -1819,32 +1819,38 @@ section {
 .auth .usingmail::after{
   right: 95px;
 }
-.auth .form-inline{
+.form-inline{
   padding: 0 50px;
   margin: 0 30px;
 }
-.auth .form-control{
+.form-control{
   border-radius: 22px;
 }
-.auth .form-control:focus{
+.form-control:focus{
   border: 1px solid #ced4da;
   box-shadow: none;
 }
-.auth .theambtn, .medicines button, .doctors button{
+.auth .theambtn, .medicines button, .doctors button, .appointment button{
   width: 180px;
   height: 50px;
   border-radius: 25px;
   background-color: #FF6337;
   border: 0;
 }
-.auth .theambtn:hover, .medicines button:hover, .doctors button:hover{
+.auth .theambtn:hover, .medicines button:hover, .doctors button:hover, .appointment button:hover{
   background-color: #ff7e5b;
 }
-.auth .btn:focus, .auth .btn-secondary:focus, .medicines .btn:focus, .medicines .btn-secondary:focus, .doctors .btn:focus, .doctors .btn-secondary:focus{
+.auth .btn:focus, .auth .btn-secondary:focus, .medicines .btn:focus, .medicines .btn-secondary:focus, .doctors .btn:focus, .doctors .btn-secondary:focus, .appointment .btn:focus, .appointment .btn-secondary:focus{
   box-shadow: none;
   background-color: #FF6337;
 }
 .medicines button, .doctors button{
   height: 40px;
   width: 100%;
+} 
+.form-select{
+  border-radius: 22px;
+}
+textarea.form-control{
+  min-height: 120px;
 }

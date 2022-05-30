@@ -223,9 +223,9 @@ function Authentication(props) {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
   );
 }
 
